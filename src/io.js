@@ -8,7 +8,22 @@ const options = {
 };
 rpio.init(options);
 
+const MAX_PUMPS = 2;
+
 const pumps = { ...config.pumps };
+
+const getPumpsStarted = function() {
+  const numStarted = Object.keys(pumps)
+    .filter((pumpName) => pumps[pumpName].started);
+  return numStarted;
+};
+
+const checkMaxPumps = function() {
+  const pumpsStarted = getPumpsStarted();
+  if (pumpsStarted.length === MAX_PUMPS) {
+    throw new Error(`Maximum number of pumps already running: ${pumpsStarted.join(', ')}.`);
+  }
+};
 
 const turnOff = function(pumpName) {
   const pump = pumps[pumpName];
@@ -30,6 +45,7 @@ const turnOn = function(pumpName) {
   if (!pump) {
     throw new Error(`Pump ${pumpName} doesn't exist.`);
   }
+  checkMaxPumps();
   if (pump.started) {
     throw new Error(`Pump ${pumpName} already running.`);
   }
@@ -37,7 +53,7 @@ const turnOn = function(pumpName) {
   pump.started = Date.now();
 };
 
-const setup = function() {
+const turnAllOff = function() {
   for (const pumpName in pumps) {
     turnOff(pumpName);
   }
@@ -46,5 +62,6 @@ const setup = function() {
 module.exports = {
   turnOff,
   turnOn,
-  setup
+  turnAllOff,
+  setup: turnAllOff
 };
