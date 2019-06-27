@@ -21,6 +21,9 @@ A file named `config.json` must exist in the root with the following shape:
       "pin": 18
     }
   },
-  "rpio_mock": "raspi-3" // null for real thing
+  "rpio_mock": "raspi-3", // null for real thing
+  "app": {
+    "port": 3001
+  }
 }
 ```

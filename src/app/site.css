@@ -1,0 +1,65 @@
+html {
+  color: #222222;
+  font-family: system-ui,BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 16px;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+button {
+  cursor: pointer;
+  font-family: system-ui,BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  text-decoration: none;
+  text-transform: none;
+  -webkit-justify-content: center;
+  justify-content: center;
+  line-height: 1.25;
+
+  font-size: 1rem;
+  padding: .25rem .5rem;
+  min-height: 2.25rem;
+  border-radius: .25rem;
+}
+.button-green {
+  background-color: #829870;
+  color: white;
+  border: none;
+}
+button.button-green:hover {
+  background-color: #617254;
+}
+
+
+#site {
+  padding: 1rem;
+}
+
+#welcome {
+  font-size: 2rem;
+  padding-bottom: 2rem;
+}
+
+#controls {
+  padding-bottom: 2rem;
+}
+
+.pump {
+  display: flex;
+  align-items: center;
+}
+.pump-name {
+  padding-right: 1rem;
+}
+
+#status-container {
+  padding: 1rem;
+  border-radius: .25rem;
+  background-color: #d6dfe6;
+}
+
+#status {
+  margin: 0;
+}

@@ -1,20 +1,27 @@
 {
-  "name": "template-js",
+  "name": "gardenpi",
   "version": "1.0.0",
   "private": true,
-  "description": "Template for javascript projects",
+  "description": "Web-controlled pi-based garden irrigation",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sedenardi/template-js.git"
+    "url": "https://github.com/sedenardi/gardenpi.git"
   },
   "author": "Sanders DeNardi <sedenardi@gmail.com> (http://www.sandersdenardi.com/)",
-  "homepage": "https://github.com/sedenardi/template-js",
+  "homepage": "https://github.com/sedenardi/gardenpi",
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^6.0.1"
+    "eslint": "^6.0.1",
+    "nodemon": "^1.19.1"
   },
   "dependencies": {
+    "@koa/router": "^8.0.0",
+    "koa": "^2.7.0",
+    "koa-static": "^5.0.0",
     "rpio": "^1.0.13"
+  },
+  "scripts": {
+    "watch": "nodemon --ignore node_modules/ --inspect server.js"
   }
 }
