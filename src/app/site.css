@@ -4,6 +4,9 @@ html {
   font-size: 16px;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+body {
+  margin: 0;
+}
 
 button {
   cursor: pointer;
@@ -22,16 +25,26 @@ button {
   padding: .25rem .5rem;
   min-height: 2.25rem;
   border-radius: .25rem;
-}
-.button-green {
-  background-color: #829870;
   color: white;
   border: none;
+  flex: none;
 }
-button.button-green:hover {
+button[disabled] {
+  cursor: not-allowed;
+  opacity: .5;
+}
+button.button-green {
+  background-color: #829870;
+}
+button.button-green:hover:not([disabled]) {
   background-color: #617254;
 }
-
+button.button-red {
+  background-color: #984d54;
+}
+button.button-red:hover:not([disabled]) {
+  background-color: #723a3f;
+}
 
 #site {
   padding: 1rem;
@@ -39,22 +52,47 @@ button.button-green:hover {
 
 #welcome {
   font-size: 2rem;
-  padding-bottom: 2rem;
+}
+
+#err {
+  color: #BF616A;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
 }
 
 #controls {
-  padding-bottom: 2rem;
+  margin: 1rem 0;
 }
 
 .pump {
+  padding: 1rem .5rem;
+  margin: .25rem 0;
   display: flex;
   align-items: center;
+  border-radius: .5rem;
+}
+.pump.on {
+  background-color: #abeca3;
 }
 .pump-name {
-  padding-right: 1rem;
+  margin-right: .5rem;
+  width: 4rem;
+  font-weight: bold;
+}
+.pump-button {
+  margin: 0 .5rem
+}
+.pump-status {
+  margin-left: .5rem;
+  flex: 1;
 }
 
+#info {
+  margin: 0 .5rem;
+}
 #status-container {
+  margin-top: 1rem;
   padding: 1rem;
   border-radius: .25rem;
   background-color: #d6dfe6;

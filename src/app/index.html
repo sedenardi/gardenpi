@@ -9,15 +9,38 @@
   <body>
     <div id="site">
       <div id="welcome">Welcome to gardenpi</div>
+      <div id="err"></div>
       <div id="controls">
-        <div class="pump" data-pump="pump_1">
+        <div id="pump_1" class="pump">
           <span class="pump-name">pump_1:</span>
-          <button class="button-green">Turn On</button>
+          <button class="pump-button pump-turn-on button-green">Turn On</button>
+          <button class="pump-button pump-turn-off button-red">Turn Off</button>
+          <span class="pump-status"></span>
+        </div>
+        <div id="pump_2" class="pump">
+          <span class="pump-name">pump_2:</span>
+          <button class="pump-button pump-turn-on button-green">Turn On</button>
+          <button class="pump-button pump-turn-off button-red">Turn Off</button>
+          <span class="pump-status"></span>
+        </div>
+        <div id="pump_3" class="pump">
+          <span class="pump-name">pump_3:</span>
+          <button class="pump-button pump-turn-on button-green">Turn On</button>
+          <button class="pump-button pump-turn-off button-red">Turn Off</button>
+          <span class="pump-status"></span>
+        </div>
+        <div id="pump_4" class="pump">
+          <span class="pump-name">pump_4:</span>
+          <button class="pump-button pump-turn-on button-green">Turn On</button>
+          <button class="pump-button pump-turn-off button-red">Turn Off</button>
+          <span class="pump-status"></span>
         </div>
       </div>
-      Status:
-      <div id="status-container">
-        <pre id="status"></pre>
+      <div id="info">
+        Status:
+        <div id="status-container">
+          <pre id="status"></pre>
+        </div>
       </div>
     </div>
     <script type="text/javascript" src="site.js"></script>

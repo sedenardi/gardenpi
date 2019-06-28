@@ -1,0 +1,111 @@
+const PUMP_NODES = {
+  pump_1: {},
+  pump_2: {},
+  pump_3: {},
+  pump_4: {}
+};
+
+const postReq = function(url, pumpName) {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({ pumpName })
+  });
+};
+
+const getPumpInfo = function(pumpName) {
+  return window.PUMPS && window.PUMPS[pumpName];
+};
+
+const setupPump = function(pumpName) {
+  const row = document.getElementById(pumpName);
+  PUMP_NODES[pumpName] = {
+    row: row,
+    name: row.querySelector('.pump-name'),
+    btnOn: row.querySelector('.pump-turn-on'),
+    btnOff: row.querySelector('.pump-turn-off'),
+    status: row.querySelector('.pump-status')
+  };
+  PUMP_NODES[pumpName].btnOn.addEventListener('click', async () => {
+    const pumpInfo = getPumpInfo(pumpName);
+    if (!pumpInfo) { return; }
+    try {
+      await postReq('/pump/on', pumpName);
+      await fetchPumps();
+    } catch(err) {
+      console.log(err);
+    }
+  });
+  PUMP_NODES[pumpName].btnOff.addEventListener('click', async () => {
+    const pumpInfo = getPumpInfo(pumpName);
+    if (!pumpInfo) { return; }
+    try {
+      await postReq('/pump/off', pumpName);
+      await fetchPumps();
+    } catch(err) {
+      console.log(err);
+    }
+  });
+};
+
+const setupPumps = function() {
+  Object.keys(PUMP_NODES).forEach(setupPump);
+};
+
+const displayDuration = function(duration) {
+  const diff = Math.floor(duration / 1000);
+  const hours = Math.floor(diff / 60 / 60);
+  const min = Math.floor(diff / 60) % 60;
+  const sec = diff % 60;
+  return `${hours}h ${min}m ${sec}s`;
+};
+
+const refreshPump = function(pumpName) {
+  const pumpInfo = getPumpInfo(pumpName);
+  if (!pumpInfo) { return; }
+  const nodes = PUMP_NODES[pumpName];
+  if (pumpInfo.started) { // pump is on
+    nodes.row.classList.add('on');
+    nodes.btnOn.disabled = true;
+    nodes.btnOff.disabled = false;
+    nodes.status.innerText = `Pump has been on for ${displayDuration(Date.now() - pumpInfo.started)}.`;
+  } else { // pump is off
+    nodes.row.classList.remove('on');
+    nodes.btnOn.disabled = false;
+    nodes.btnOff.disabled = true;
+    if (pumpInfo.lastRun) {
+      const ago = displayDuration(Date.now() - pumpInfo.lastRun.started);
+      const howLong = displayDuration(pumpInfo.lastRun.ended - pumpInfo.lastRun.started);
+      nodes.status.innerText = `Last run ${ago} ago for ${howLong}.`;
+    } else {
+      nodes.status.innerText = '';
+    }
+  }
+};
+
+const refreshPumps = function() {
+  Object.keys(window.PUMPS).forEach(refreshPump);
+  
+  const debugInfo = JSON.stringify(window.PUMPS, null, 2);
+  document.getElementById('status').innerText = debugInfo;
+};
+
+const fetchPumps = async function() {
+  try {
+    const res = await fetch('/pumps');
+    window.PUMPS = await res.json();
+    refreshPumps();
+  } catch(err) {
+    console.log(err);
+  }
+};
+
+window.addEventListener('load', () => {
+  setupPumps();
+  fetchPumps();
+  setInterval(() => {
+    fetchPumps();
+  }, 2000);
+});

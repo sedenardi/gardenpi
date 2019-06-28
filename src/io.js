@@ -51,6 +51,7 @@ const turnOn = function(pumpName) {
   }
   rpio.open(pump.pin, rpio.OUTPUT, rpio.LOW);
   pump.started = Date.now();
+  console.log('pump started');
 };
 
 const turnAllOff = function() {
@@ -59,9 +60,14 @@ const turnAllOff = function() {
   }
 };
 
+const getPumps = function() {
+  return { ...pumps };
+};
+
 module.exports = {
   turnOff,
   turnOn,
   turnAllOff,
-  setup: turnAllOff
+  setup: turnAllOff,
+  getPumps
 };
