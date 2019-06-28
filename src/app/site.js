@@ -24,6 +24,7 @@ const setupPump = function(pumpName) {
   PUMP_NODES[pumpName] = {
     row: row,
     name: row.querySelector('.pump-name'),
+    description: row.querySelector('.pump-description'),
     btnOn: row.querySelector('.pump-turn-on'),
     btnOff: row.querySelector('.pump-turn-off'),
     status: row.querySelector('.pump-status')
@@ -82,6 +83,9 @@ const refreshPump = function(pumpName) {
     } else {
       nodes.status.innerText = '';
     }
+  }
+  if (pumpInfo.description) {
+    nodes.description.innerText = pumpInfo.description;
   }
 };
 

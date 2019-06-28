@@ -80,6 +80,10 @@ button.button-red:hover:not([disabled]) {
   width: 4rem;
   font-weight: bold;
 }
+.pump-description {
+  font-size: .75rem;
+  color: #777;
+}
 .pump-button {
   margin: 0 .5rem
 }
