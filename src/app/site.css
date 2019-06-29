@@ -69,6 +69,7 @@ button.button-red:hover:not([disabled]) {
   padding: 1rem .5rem;
   margin: .25rem 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   border-radius: .5rem;
 }
@@ -91,6 +92,12 @@ button.button-red:hover:not([disabled]) {
   margin-left: .5rem;
   flex: 1;
 }
+@media (max-width: 576px) {
+  .pump-status {
+    margin: .5rem 0 0 0;
+    flex: none;
+  }
+}
 
 #info {
   margin: 0 .5rem;
@@ -104,4 +111,6 @@ button.button-red:hover:not([disabled]) {
 
 #status {
   margin: 0;
+  overflow: scroll;
+  font-size: .85rem;
 }

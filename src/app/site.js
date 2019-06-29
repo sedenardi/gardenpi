@@ -75,7 +75,7 @@ const refreshPump = function(pumpName) {
     nodes.status.innerText = `Pump has been on for ${displayDuration(Date.now() - pumpInfo.started)}.`;
   } else { // pump is off
     nodes.row.classList.remove('on');
-    nodes.btnOn.disabled = false;
+    nodes.btnOn.disabled = status.pumpLimitHit;
     nodes.btnOff.disabled = true;
     if (pumpInfo.lastRun) {
       const ago = displayDuration(Date.now() - pumpInfo.lastRun.started);
