@@ -5,7 +5,7 @@ module.exports = function(app) {
   const router = new Router();
 
   router.get('/pumps', async (ctx) => {
-    ctx.body = io.getPumps();
+    ctx.body = io.getStatus();
   });
 
   router.use(async (ctx, next) => {

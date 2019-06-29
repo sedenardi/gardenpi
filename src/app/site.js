@@ -1,3 +1,4 @@
+let status;
 const PUMP_NODES = {
   pump_1: {},
   pump_2: {},
@@ -16,7 +17,7 @@ const postReq = function(url, pumpName) {
 };
 
 const getPumpInfo = function(pumpName) {
-  return window.PUMPS && window.PUMPS[pumpName];
+  return status && status.pumps && status.pumps[pumpName];
 };
 
 const setupPump = function(pumpName) {
@@ -34,7 +35,7 @@ const setupPump = function(pumpName) {
     if (!pumpInfo) { return; }
     try {
       await postReq('/pump/on', pumpName);
-      await fetchPumps();
+      await fetchStatus();
     } catch(err) {
       console.log(err);
     }
@@ -44,7 +45,7 @@ const setupPump = function(pumpName) {
     if (!pumpInfo) { return; }
     try {
       await postReq('/pump/off', pumpName);
-      await fetchPumps();
+      await fetchStatus();
     } catch(err) {
       console.log(err);
     }
@@ -90,16 +91,16 @@ const refreshPump = function(pumpName) {
 };
 
 const refreshPumps = function() {
-  Object.keys(window.PUMPS).forEach(refreshPump);
+  Object.keys(status.pumps).forEach(refreshPump);
   
-  const debugInfo = JSON.stringify(window.PUMPS, null, 2);
+  const debugInfo = JSON.stringify(status, null, 2);
   document.getElementById('status').innerText = debugInfo;
 };
 
-const fetchPumps = async function() {
+const fetchStatus = async function() {
   try {
     const res = await fetch('/pumps');
-    window.PUMPS = await res.json();
+    status = await res.json();
     refreshPumps();
   } catch(err) {
     console.log(err);
@@ -108,8 +109,8 @@ const fetchPumps = async function() {
 
 window.addEventListener('load', () => {
   setupPumps();
-  fetchPumps();
+  fetchStatus();
   setInterval(() => {
-    fetchPumps();
+    fetchStatus();
   }, 2000);
 });
