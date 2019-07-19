@@ -31,7 +31,7 @@ const turnOff = function(pumpName) {
   if (!pump) {
     throw new Error(`Pump ${pumpName} doesn't exist.`);
   }
-  rpio.open(pump.pin, rpio.OUTPUT, rpio.HIGH);
+  rpio.open(pump.pin, rpio.OUTPUT, rpio.LOW);
   if (pump.started) {
     pump.lastRun = {
       started: pump.started,
@@ -50,7 +50,7 @@ const turnOn = function(pumpName) {
   if (pump.started) {
     throw new Error(`Pump ${pumpName} already running.`);
   }
-  rpio.open(pump.pin, rpio.OUTPUT, rpio.LOW);
+  rpio.open(pump.pin, rpio.OUTPUT, rpio.HIGH);
   pump.started = Date.now();
 };
 
