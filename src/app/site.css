@@ -34,10 +34,10 @@ button[disabled] {
   opacity: .5;
 }
 button.button-green {
-  background-color: #829870;
+  background-color: #0F675A;
 }
 button.button-green:hover:not([disabled]) {
-  background-color: #617254;
+  background-color: #004740;
 }
 button.button-red {
   background-color: #984d54;
