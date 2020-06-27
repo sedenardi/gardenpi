@@ -13,7 +13,7 @@ gardenpi is a raspberry-pi web server connected to relays that control water pum
 
 A file named `config.json` must exist in the root with the following shape:
 
-```json
+```jsonc
 {
   "io": {
     "pumps": {
