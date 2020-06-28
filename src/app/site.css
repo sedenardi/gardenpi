@@ -114,3 +114,7 @@ button.button-red:hover:not([disabled]) {
   overflow: scroll;
   font-size: .85rem;
 }
+
+#templates {
+  display: none;
+}

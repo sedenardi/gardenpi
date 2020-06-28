@@ -1,10 +1,5 @@
 let status;
-const PUMP_NODES = {
-  pump_1: {},
-  pump_2: {},
-  pump_3: {},
-  pump_4: {}
-};
+const PUMP_NODES = { };
 
 const postReq = function(url, pumpName) {
   return fetch(url, {
@@ -21,7 +16,18 @@ const getPumpInfo = function(pumpName) {
 };
 
 const setupPump = function(pumpName) {
-  const row = document.getElementById(pumpName);
+  let row = document.getElementById(pumpName);
+  if (row) {
+    return;
+  }
+
+  const pumpControl = document.querySelector('#templates')
+    .querySelector('.pump')
+    .cloneNode(true);
+  pumpControl.id = pumpName;
+  document.querySelector('#controls').appendChild(pumpControl);
+  row = document.getElementById(pumpName);
+
   PUMP_NODES[pumpName] = {
     row: row,
     name: row.querySelector('.pump-name'),
@@ -30,6 +36,7 @@ const setupPump = function(pumpName) {
     btnOff: row.querySelector('.pump-turn-off'),
     status: row.querySelector('.pump-status')
   };
+  PUMP_NODES[pumpName].name.innerText = `${pumpName}:`;
   PUMP_NODES[pumpName].btnOn.addEventListener('click', async () => {
     const pumpInfo = getPumpInfo(pumpName);
     if (!pumpInfo) { return; }
@@ -53,7 +60,10 @@ const setupPump = function(pumpName) {
 };
 
 const setupPumps = function() {
-  Object.keys(PUMP_NODES).forEach(setupPump);
+  if (!status) {
+    return;
+  }
+  Object.keys(status.pumps).forEach(setupPump);
 };
 
 const displayDuration = function(duration) {
@@ -101,6 +111,7 @@ const fetchStatus = async function() {
   try {
     const res = await fetch('/pumps');
     status = await res.json();
+    setupPumps();
     refreshPumps();
   } catch(err) {
     console.log(err);
@@ -108,7 +119,6 @@ const fetchStatus = async function() {
 };
 
 window.addEventListener('load', () => {
-  setupPumps();
   fetchStatus();
   setInterval(() => {
     fetchStatus();
