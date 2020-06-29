@@ -32,6 +32,10 @@ A file named `config.json` must exist in the root with the following shape:
       "pump_4": {
         "pin": 18,
         "description": "bells"
+      },
+      "pump_5": {
+        "pin": 22,
+        "description": "valve"
       }
     },
     "maxSimultaneousPumps": 2, // optional
