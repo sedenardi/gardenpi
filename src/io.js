@@ -10,7 +10,6 @@ rpio.init(options);
 
 const pumps = { ...config.io.pumps };
 const MAX_SIMULTANEOUS_PUMPS = config.io.maxSimultaneousPumps;
-const MAX_PUMP_RUNTIME = config.io.maxPumpRuntime;
 
 const getPumpsStarted = function() {
   const numStarted = Object.keys(pumps)
@@ -70,13 +69,13 @@ const getStatus = function() {
 const setup = function() {
   turnAllOff();
 
-  if (!MAX_PUMP_RUNTIME) { return; }
   setInterval(() => {
     Object.keys(pumps).forEach((pumpName) => {
       const pump = pumps[pumpName];
       if (!pump.started) { return; }
+      if (!pump.maxPumpRuntime) { return; }
       const runtime = Date.now() - pump.started;
-      if (runtime > MAX_PUMP_RUNTIME) {
+      if (runtime > pump.maxPumpRuntime) {
         turnOff(pumpName);
       }
     });

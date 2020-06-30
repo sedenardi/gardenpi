@@ -19,7 +19,8 @@ A file named `config.json` must exist in the root with the following shape:
     "pumps": {
       "pump_1": {
         "pin": 11,
-        "description": "sun gold" // optional
+        "description": "sun gold", // optional
+        "maxPumpRuntime": 10000 // optional
       },
       "pump_2": {
         "pin": 13,
@@ -39,7 +40,6 @@ A file named `config.json` must exist in the root with the following shape:
       }
     },
     "maxSimultaneousPumps": 2, // optional
-    "maxPumpRuntime": 10000 // optional
   },
   "rpio_mock": "raspi-3", // null for real thing
   "app": {
