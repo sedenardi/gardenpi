@@ -66,15 +66,30 @@ button.button-red:hover:not([disabled]) {
 }
 
 .pump {
-  padding: 1rem .5rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-bottom: 1rem;
   margin: .25rem 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   border-radius: .5rem;
 }
+@media (max-width: 576px) {
+  .pump {
+    display: block;
+    padding-bottom: .5rem;
+  }
+}
+
+.pump > div {
+  padding-bottom: .5rem;
+}
 .pump.on {
   background-color: #abeca3;
+}
+.pump-info {
+  padding-right: 1rem;
 }
 .pump-name {
   margin-right: .5rem;
@@ -86,15 +101,13 @@ button.button-red:hover:not([disabled]) {
   color: #777;
 }
 .pump-button {
-  margin: 0 .5rem
+  margin-right: 1rem
 }
 .pump-status {
-  margin-left: .5rem;
   flex: 1;
 }
 @media (max-width: 576px) {
   .pump-status {
-    margin: .5rem 0 0 0;
     flex: none;
   }
 }
